@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Model.DataAccessObject;
+using Model.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +12,7 @@ namespace OnlineShop.Controllers
     {
         public ActionResult Index()
         {
+            new UserDAO().Insert(new User());
             return View();
         }
 
