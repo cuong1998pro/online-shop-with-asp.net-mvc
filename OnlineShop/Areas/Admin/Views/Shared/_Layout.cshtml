@@ -17,6 +17,8 @@
     <!-- C3 Chart css -->
     <link href="/Assets/Admin/libs/c3/c3.min.css" rel="stylesheet" type="text/css" />
 
+    @RenderSection("css", required: false)
+
     <!-- App css -->
     <link href="/Assets/Admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="/Assets/Admin/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -51,7 +53,7 @@
                                             <li class="breadcrumb-item active">Form Advanced</li>
                                         </ol>
                                     </div>*@
-                                <h4 class="page-title">@RenderSection("header", required:true)</h4>
+                                <h4 class="page-title">@RenderSection("header", required: true)</h4>
                             </div>
                         </div>
                     </div>
@@ -73,12 +75,14 @@
     <script src="/Assets/Admin/js/vendor.min.js"></script>
 
     <!--C3 Chart-->
-    <script src="/Assets/Admin/libs/d3/d3.min.js"></script>
-    <script src="/Assets/Admin/libs/c3/c3.min.js"></script>
+    @*<script src="/Assets/Admin/libs/d3/d3.min.js"></script>
+        <script src="/Assets/Admin/libs/c3/c3.min.js"></script>
 
-    <script src="/Assets/Admin/libs/echarts/echarts.min.js"></script>
+        <script src="/Assets/Admin/libs/echarts/echarts.min.js"></script>
 
-    <script src="/Assets/Admin/js/pages/dashboard.init.js"></script>
+        <script src="/Assets/Admin/js/pages/dashboard.init.js"></script>*@
+
+    @RenderSection("script", required: false)
 
     <!-- App js -->
     <script src="/Assets/Admin/js/app.min.js"></script>

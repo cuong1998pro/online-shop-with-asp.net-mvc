@@ -8,9 +8,12 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 1)
         {
-            return View();
+            var dao = new UserDAO();
+            //var model = dao.ListAllByPaging(page, pageSize);
+            var model = dao.ListAll();
+            return View(model);
         }
 
         [HttpGet]

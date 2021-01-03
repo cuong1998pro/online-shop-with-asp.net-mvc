@@ -1,5 +1,7 @@
 ﻿using Model.EntityFramework;
+using System.Collections.Generic;
 using System.Linq;
+using PagedList;
 
 namespace Model.DataAccessObject
 {
@@ -23,7 +25,7 @@ namespace Model.DataAccessObject
             {
                 return "Tài khoản bị khoá.";
             }
-            else if(user.Password != password)
+            else if (user.Password != password)
             {
                 return "Mật khẩu không đúng.";
             }
@@ -36,6 +38,16 @@ namespace Model.DataAccessObject
         public User GetByUsername(string userName)
         {
             return DataAccess.Db.Users.SingleOrDefault(x => x.UserName == userName);
+        }
+
+        public IEnumerable<User> ListAllByPaging(int page, int pageSize)
+        {
+            return DataAccess.Db.Users.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+        }
+
+        public IEnumerable<User> ListAll()
+        {
+            return DataAccess.Db.Users.ToList();
         }
     }
 }
