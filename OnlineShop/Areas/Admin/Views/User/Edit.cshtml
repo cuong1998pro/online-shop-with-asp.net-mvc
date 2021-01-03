@@ -6,19 +6,19 @@
 }
 
 @section header{
-    Thêm người dùng
+    Cập nhật người dùng
 }
 
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h4 class="header-title">Thêm người dùng mới</h4>
+            <h4 class="header-title">Cập nhật thông tin</h4>
 
             <br />
             <div class="row">
                 <div class="col-12">
                     <div>
-                        @using (Html.BeginForm("Create", "User", FormMethod.Post))
+                        @using (Html.BeginForm("Edit", "User", FormMethod.Post))
                         {
                             <div class="form-horizontal">
 
@@ -78,7 +78,7 @@
                                     <label class="col-md-2 col-form-label" for="example-email">Trạng thái</label>
                                     <div class="col-md-10">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" name="Status" id="status" value="true" />
+                                            <input type="checkbox" name="Status" id="status" value="true" @(Model.Status ? "checked" : "") />
                                             <label for="status"></label>
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
 
                                 <div class="row">
                                     <div class=" col-md-10 offset-md-2">
-                                        <input type="submit" value="Tạo mới" class="btn btn-success waves-effect waves-light mr-1" />
+                                        <input type="submit" value="Cập nhật" class="btn btn-success waves-effect waves-light mr-1" />
                                         @Html.ActionLink("Xem danh sách", "Index", "User", new { @class = "btn btn-secondary waves-effect" })
                                     </div>
                                 </div>

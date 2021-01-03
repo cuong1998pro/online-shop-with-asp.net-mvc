@@ -34,12 +34,42 @@ namespace OnlineShop.Areas.Admin.Controllers
                 {
                     return RedirectToAction("Index", "User");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Đã xảy ra lỗi, thử lại sau.");
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", "Thêm không thành công");
-            }
+
             return View("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var user = new UserDAO().ViewDetail(id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDAO();
+                user.Password = Encryptor.MD5Hash(user.Password);
+                bool result = dao.Update(user);
+                if (result)
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Đã xảy ra lỗi, thử lại sau.");
+                }
+            }
+
+            return View("Edit", user);
         }
     }
 }

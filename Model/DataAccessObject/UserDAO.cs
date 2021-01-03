@@ -1,7 +1,8 @@
 ﻿using Model.EntityFramework;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PagedList;
 
 namespace Model.DataAccessObject
 {
@@ -48,6 +49,27 @@ namespace Model.DataAccessObject
         public IEnumerable<User> ListAll()
         {
             return DataAccess.Db.Users.ToList();
+        }
+
+        public bool Update(User entity)
+        {
+            try
+            {
+                var user = DataAccess.Db.Users.Find(entity.ID);
+                DataAccess.Db.Entry(user).CurrentValues.SetValues(entity);
+                user.ModifiedDate = DateTime.Now;
+                return DataAccess.Db.SaveChanges() > 0;
+            }
+            catch
+            {
+                //loging
+                return false;
+            }
+        }
+
+        public User ViewDetail(int id)
+        {
+            return DataAccess.Db.Users.Find(id);
         }
     }
 }

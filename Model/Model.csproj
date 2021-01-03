@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\CustomErrorMessage.cs" />
     <Compile Include="DataAccessObject\DataAccess.cs" />
     <Compile Include="DataAccessObject\UserDAO.cs" />
     <Compile Include="EntityFramework\About.cs" />

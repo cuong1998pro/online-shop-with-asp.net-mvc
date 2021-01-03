@@ -5,17 +5,20 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Model.Content;
 
     [Table("User")]
     public partial class User
     {
         public int ID { get; set; }
 
-        [StringLength(50)]
+        [CustomRequired]
+        [CustomMaxLength(50)]
         [Display(Name = "Tên tài khoản")]
         public string UserName { get; set; }
 
         [StringLength(32)]
+        [CustomRequired]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
