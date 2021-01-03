@@ -15,6 +15,6 @@ namespace Model.EntityFramework
         [Column(TypeName = "ntext")]
         public string Content { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }

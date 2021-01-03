@@ -19,17 +19,21 @@ namespace OnlineShop.Areas.Admin.Controllers
             {
                 var dao = new UserDAO();
                 var user = dao.GetByUsername(model.Username);
-                var result = dao.Login(model.Username, model.Pasword);
-                if (result)
+                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
+                if (result is bool)
                 {
                     var userSession = new UserLogin() { Username = user.UserName, UserID = user.ID };
                     Session.Add(CommonConstants.USER_SESSION.ToString(), userSession);
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                else if ((string)result != "")
                 {
-                    ModelState.AddModelError("", "Tên đăng nhập, mật khẩu không đúng");
+                    ModelState.AddModelError("", (string)result);
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Hãy nhập đủ thông tin.");
             }
             return View("Index");
         }

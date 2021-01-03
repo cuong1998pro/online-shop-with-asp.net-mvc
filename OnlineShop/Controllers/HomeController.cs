@@ -12,7 +12,6 @@ namespace OnlineShop.Controllers
     {
         public ActionResult Index()
         {
-            new UserDAO().Insert(new User());
             return View();
         }
 

@@ -33,7 +33,7 @@ namespace Model.EntityFramework
 
         public decimal? PromotionPrice { get; set; }
 
-        public bool? IncludedVAT { get; set; }
+        public bool IncludedVAT { get; set; }
 
         public int? Quantity { get; set; }
 
@@ -60,7 +60,7 @@ namespace Model.EntityFramework
         [StringLength(250)]
         public string MetaDescription { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public DateTime? TopHot { get; set; }
 
