@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         // GET: Admin/User
         public ActionResult Index(int page = 1, int pageSize = 1)
@@ -70,6 +70,12 @@ namespace OnlineShop.Areas.Admin.Controllers
             }
 
             return View("Edit", user);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            new UserDAO().Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

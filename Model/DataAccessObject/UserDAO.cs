@@ -71,5 +71,12 @@ namespace Model.DataAccessObject
         {
             return DataAccess.Db.Users.Find(id);
         }
+
+        public bool Delete(int id)
+        {
+            var user = DataAccess.Db.Users.Find(id);
+            DataAccess.Db.Users.Remove(user);
+            return DataAccess.Db.SaveChanges() > 0;
+        }
     }
 }

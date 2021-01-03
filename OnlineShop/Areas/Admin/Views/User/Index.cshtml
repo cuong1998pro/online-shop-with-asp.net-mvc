@@ -1,68 +1,85 @@
 ﻿@model List<Model.EntityFramework.User>
-    @*Paged List*@
-    @*@model PagedList.IPagedList<Model.EntityFramework.User>*@
-    @*@using PagedList.Mvc*@
-    @{
-        ViewBag.Title = "Quản lý người dùng";
-        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    }
+@*Paged List*@
+@*@model PagedList.IPagedList<Model.EntityFramework.User>*@
+@*@using PagedList.Mvc*@
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-    @section header{
-        Danh sách người dùng
-    }
+@section header{
+    Danh sách người dùng
+}
 
-    @section css{
-        <!-- third party css -->
-        <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-    }
+@section css{
+    <!-- third party css -->
+    <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+}
 
-    @section script {
-        <!-- third party js -->
-        <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
+@section script {
+    <!-- third party js -->
+    <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
 
-        <!-- Tickets js -->
-        <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
-    }
+    <!-- Tickets js -->
+    <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card-box">
-                <h4 class="header-title mb-3">Manage Tickets</h4>
+}
 
-                <table class="table table-hover m-0 tickets-list table-actions-bar dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable">
-                    <thead>
-                        <tr>
-                            <th>
-                                ID
-                            </th>
-                            <th>Tài khoản</th>
-                            <th>Họ tên</th>
-                            <th>Email</th>
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <h4 class="header-title mb-3">Manage Tickets</h4>
 
-                            <th class="hidden-sm">Action</th>
+            <table class="table table-hover m-0 tickets-list table-actions-bar dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>Tài khoản</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+
+                        <th class="hidden-sm">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>
+                                <a href="/Admin/User/Edit/@item.ID">Cập nhật</a>
+                                @*<a class="text-danger" href="/Admin/User/Delete/@item.ID">Xoá</a>*@
+
+                                @*@Ajax.ActionLink("Xoá<i class='fa fa-times'></i>", "Delete", new  {@id = item.ID },  new AjaxOptions
+                                    {
+                                        Confirm = "Bạn có muốn xoá bản ghi này?",
+                                        OnComplete = $"$('#row_{@item.ID}').remove()",
+                                        HttpMethod = "Delete"
+                                    }, new { @class = "text-danger" })*@
+
+                                <a class="text-danger" data-ajax="true"
+                                   data-ajax-complete="$('#row_@item.ID').remove()"
+                                   data-ajax-confirm="Bạn có muốn xoá bản ghi này?"
+                                   data-ajax-method="Delete"
+                                   href="/Admin/User/Delete/@item.ID">
+                                    Xoá
+                                    @*<i class="fa fa-times"></i>*@
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.ID</td>
-                                <td>@item.UserName</td>
-                                <td>@item.Name</td>
-                                <td>@item.Email</td>
-                                <td>
-                                    <a href="/Admin/User/Edit/@item.ID">Cập nhật</a>
-                                    <a class="text-danger" href="/Admin/User/Delete/@item.ID">Xoá</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
-            </div>
-        </div><!-- end col -->
-    </div>
+                    }
+                </tbody>
+            </table>
+            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+        </div>
+    </div><!-- end col -->
+</div>
