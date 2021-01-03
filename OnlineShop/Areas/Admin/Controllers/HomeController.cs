@@ -2,9 +2,9 @@
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    //[Authorize]
-    
-    public class HomeController : BaseController
+    [Authorize]
+    //[AllowAnonymous] cho phep khong dang nhap vao duoc
+    public class HomeController : Controller
     {
         // GET: Admin/Home
         public ActionResult Index()

@@ -5,7 +5,8 @@ using System.Web.Mvc;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class UserController : BaseController
+    [Authorize]
+    public class UserController : Controller
     {
         // GET: Admin/User
         public ActionResult Index(int page = 1, int pageSize = 1)

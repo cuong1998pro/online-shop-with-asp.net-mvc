@@ -2,6 +2,7 @@
 using OnlineShop.Areas.Admin.Models;
 using OnlineShop.Common;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
@@ -13,22 +14,51 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View();
         }
 
+        #region Dang nhap bang session
+
+        //public ActionResult Login(LoginModel model)
+        //{
+        //    if (ModelState.IsValid )
+        //    {
+        //        var dao = new UserDAO();
+        //        var user = dao.GetByUsername(model.Username);
+        //        var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
+        //        if (result is bool)
+        //        {
+        //            var userSession = new UserLogin() { Username = user.UserName, UserID = user.ID };
+        //            Session.Add(CommonConstants.USER_SESSION.ToString(), userSession);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else if ((string)result != "")
+        //        {
+        //            ModelState.AddModelError("", (string)result);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("", "Hãy nhập đủ thông tin.");
+        //    }
+        //    return View("Index");
+        //}
+
+        #endregion Dang nhap bang session
+
+        //Dang nhap bang membership
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
                 var dao = new UserDAO();
-                var user = dao.GetByUsername(model.Username);
-                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
-                if (result is bool)
+                if (Membership.ValidateUser(model.Username, Encryptor.MD5Hash(model.Pasword)))
                 {
-                    var userSession = new UserLogin() { Username = user.UserName, UserID = user.ID };
-                    Session.Add(CommonConstants.USER_SESSION.ToString(), userSession);
+                    //set cookie
+                    FormsAuthentication.SetAuthCookie(model.Username, model.RememberMe);
                     return RedirectToAction("Index", "Home");
                 }
-                else if ((string)result != "")
+                else
                 {
-                    ModelState.AddModelError("", (string)result);
+                    string result = (string)dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
+                    ModelState.AddModelError("", result);
                 }
             }
             else
@@ -36,6 +66,13 @@ namespace OnlineShop.Areas.Admin.Controllers
                 ModelState.AddModelError("", "Hãy nhập đủ thông tin.");
             }
             return View("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return View();
         }
     }
 }

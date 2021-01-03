@@ -26,7 +26,6 @@
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <img src="/Assets/Admin/images/flags/russia.jpg" alt="lang-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
                 </a>
-
             </div>
         </li>
 
@@ -125,7 +124,6 @@
                     View all
                     <i class="fi-arrow-right"></i>
                 </a>
-
             </div>
         </li>
 
@@ -133,7 +131,7 @@
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <img src="/Assets/Admin/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ml-1">
-                    Maxine K  <i class="mdi mdi-chevron-down"></i>
+                    @User.Identity.Name  <i class="mdi mdi-chevron-down"></i>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -163,11 +161,10 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="/admin/login/logout" class="dropdown-item notify-item">
                     <i class="fe-log-out"></i>
                     <span>Logout</span>
                 </a>
-
             </div>
         </li>
 
@@ -176,8 +173,6 @@
                 <i class="fe-settings noti-icon"></i>
             </a>
         </li>
-
-
     </ul>
 
     <!-- LOGO -->
@@ -215,7 +210,6 @@
                 </div>
             </form>
         </li>
-
     </ul>
 </div>
 <!-- end Topbar -->
