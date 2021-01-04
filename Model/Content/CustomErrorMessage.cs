@@ -17,7 +17,7 @@ namespace Model.Content
         }
     }
 
-    public class CustomMaxLength : StringLengthAttribute
+    public class CustomMaxLength : CustomMaxLengthAttribute
     {
         public CustomMaxLength(int maximumLength) : base(maximumLength)
         {

@@ -9,10 +9,10 @@ namespace Model.EntityFramework
     [Table("Tag")]
     public partial class Tag
     {
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string ID { get; set; }
 
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string Name { get; set; }
     }
 }

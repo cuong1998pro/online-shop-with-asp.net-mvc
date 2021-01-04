@@ -11,16 +11,16 @@ namespace Model.EntityFramework
     {
         public long ID { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string Name { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string MetaTitle { get; set; }
 
-        [StringLength(500)]
+        [CustomMaxLength(500)]
         public string Description { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string Image { get; set; }
 
         public long? CategoryID { get; set; }
@@ -30,18 +30,18 @@ namespace Model.EntityFramework
 
         public DateTime? CreatedDate { get; set; }
 
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string CreatedBy { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string ModifiedBy { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string MetaKeywords { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string MetaDescription { get; set; }
 
         public bool Status { get; set; }
@@ -50,7 +50,7 @@ namespace Model.EntityFramework
 
         public int? ViewCount { get; set; }
 
-        [StringLength(500)]
+        [CustomMaxLength(500)]
         public string Tags { get; set; }
     }
 }

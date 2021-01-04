@@ -16,7 +16,7 @@ namespace Model.EntityFramework
 
         [Key]
         [Column(Order = 1)]
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string TagID { get; set; }
     }
 }

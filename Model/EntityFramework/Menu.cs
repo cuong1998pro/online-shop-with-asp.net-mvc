@@ -11,15 +11,15 @@ namespace Model.EntityFramework
     {
         public int ID { get; set; }
 
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string Text { get; set; }
 
-        [StringLength(250)]
+        [CustomMaxLength(250)]
         public string Link { get; set; }
 
         public int? DisplayOrder { get; set; }
 
-        [StringLength(50)]
+        [CustomMaxLength(50)]
         public string Target { get; set; }
 
         public bool Status { get; set; }
