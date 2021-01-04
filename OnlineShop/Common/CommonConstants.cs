@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace OnlineShop.Common
+﻿namespace OnlineShop.Common
 {
-    public enum CommonConstants
+    public static class CommonConstants
     {
-        USER_SESSION
+        public const int USER_SESSION = 1;
+        public const int NUMBER_ROW_OF_PAGE = 10;
     }
 }
