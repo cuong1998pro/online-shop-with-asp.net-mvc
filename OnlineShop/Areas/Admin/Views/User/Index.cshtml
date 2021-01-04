@@ -1,7 +1,11 @@
-﻿@model List<Model.EntityFramework.User>
+﻿@*@model List<Model.EntityFramework.User>*@
 @*Paged List*@
-@*@model PagedList.IPagedList<Model.EntityFramework.User>*@
-@*@using PagedList.Mvc*@
+@model PagedList<Model.EntityFramework.User>
+
+@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
 @{
     ViewBag.Title = "Quản lý người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -11,27 +15,28 @@
     Danh sách người dùng
 }
 
-@section css{
-    <!-- third party css -->
-    <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-    <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-}
-
-@section script {
-    <!-- third party js -->
-    <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
-    <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
-
-    <!-- Tickets js -->
-    <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
-
-}
-
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h4 class="header-title mb-3">Manage Tickets</h4>
+            <div class="row justify-content-between  align-items-baseline">
+                <h4 class="header-title mb-3">Manage Tickets</h4>
+                <a href="/admin/user/create" class="btn btn-success waves-effect waves-light float-right">Thêm mới</a>
+            </div>
+            <br />
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("Index", "User", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        <div class="form-group mr-2">
+                            <label class="sr-only">Từ khoá</label>
+                            <input type="text" class="form-control" placeholder="Tìm kiếm" value="@ViewBag.SearchString" name="searchString" />
+                        </div>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-md">Tìm kiếm</button>
+
+                    }
+                </div>
+            </div>
 
             <table class="table table-hover m-0 tickets-list table-actions-bar dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable">
                 <thead>
@@ -57,7 +62,6 @@
                             <td>@item.Email</td>
                             <td>
                                 <a href="/Admin/User/Edit/@item.ID">Cập nhật</a>
-                                @*<a class="text-danger" href="/Admin/User/Delete/@item.ID">Xoá</a>*@
 
                                 @*@Ajax.ActionLink("Xoá<i class='fa fa-times'></i>", "Delete", new  {@id = item.ID },  new AjaxOptions
                                     {
@@ -65,7 +69,7 @@
                                         OnComplete = $"$('#row_{@item.ID}').remove()",
                                         HttpMethod = "Delete"
                                     }, new { @class = "text-danger" })*@
-
+                                |
                                 <a class="text-danger" data-ajax="true"
                                    data-ajax-complete="$('#row_@item.ID').remove()"
                                    data-ajax-confirm="Bạn có muốn xoá bản ghi này?"
@@ -79,7 +83,29 @@
                     }
                 </tbody>
             </table>
-            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page , @searchString = @ViewBag.SearchString}), new PagedListRenderOptions
+       {
+           LiElementClasses = new string[] { "page-item" },
+           PageClasses = new string[] { "page-link" },
+
+       })
         </div>
     </div><!-- end col -->
 </div>
+
+@*@section css{
+        <!-- third party css -->
+        <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    }
+
+    @section script {
+        <!-- third party js -->
+        <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
+
+        <!-- Tickets js -->
+        <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
+
+    }*@

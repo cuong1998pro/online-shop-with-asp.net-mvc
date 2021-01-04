@@ -1,5 +1,6 @@
 ﻿using Model.EntityFramework;
-using PagedList;
+using X.PagedList;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,14 @@ namespace Model.DataAccessObject
             return DataAccess.Db.Users.SingleOrDefault(x => x.UserName == userName);
         }
 
-        public IEnumerable<User> ListAllByPaging(int page, int pageSize)
+        public IEnumerable<User> ListAllByPaging(string searchString, int page, int pageSize)
         {
-            return DataAccess.Db.Users.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            IQueryable<User> model = DataAccess.Db.Users;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.UserName.Contains(searchString) || x.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
 
         public IEnumerable<User> ListAll()
