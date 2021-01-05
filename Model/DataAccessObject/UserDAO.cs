@@ -91,5 +91,13 @@ namespace Model.DataAccessObject
             DataAccess.Db.Users.Remove(user);
             return DataAccess.Db.SaveChanges() > 0;
         }
+
+        public bool ChangeStatus(int id)
+        {
+            var user = DataAccess.Db.Users.Find(id);
+            user.Status = !user.Status;
+            DataAccess.Db.SaveChanges();
+            return user.Status;
+        }
     }
 }

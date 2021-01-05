@@ -15,6 +15,39 @@
     Danh sách người dùng
 }
 
+@section script{
+    <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on("click", function (e) {
+                    e.preventDefault();
+
+                    var btn = $(this);
+                    var id = $(this).data("id");
+
+                    $.ajax({
+                        url: "/admin/user/changestatus",
+                        data: { id: id },
+                        type: "post",
+                        dataType: "json",
+                        success: function (res) {
+                            if (res.status) {
+                                btn.text("Kích hoạt")
+                            } else {
+                                btn.text("Khoá")
+                            }
+                        }
+                    });
+                });
+            }
+        };
+        user.init();
+    </script>
+}
+
 <div class="row">
     <div class="col-12">
         <div class="card-box">
@@ -47,8 +80,8 @@
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().UserName)</th>
                         <th>Họ tên</th>
                         <th>Email</th>
-
-                        <th class="hidden-sm">Action</th>
+                        <th>Trạng thái</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -61,15 +94,13 @@
                             <td>@item.Name</td>
                             <td>@item.Email</td>
                             <td>
+                                <a href="#" class="btn-active" data-id="@item.ID">
+                                    @(item.Status ? "Kích hoạt" : "Khoá")
+                                </a>
+                            </td>
+                            <td>
                                 <a href="/Admin/User/Edit/@item.ID">Cập nhật</a>
 
-                                @*@Ajax.ActionLink("Xoá<i class='fa fa-times'></i>", "Delete", new  {@id = item.ID },  new AjaxOptions
-                                    {
-                                        Confirm = "Bạn có muốn xoá bản ghi này?",
-                                        OnComplete = $"$('#row_{@item.ID}').remove()",
-                                        HttpMethod = "Delete"
-                                    }, new { @class = "text-danger" })*@
-                                |
                                 <a class="text-danger" data-ajax="true"
                                    data-ajax-complete="$('#row_@item.ID').remove()"
                                    data-ajax-confirm="Bạn có muốn xoá bản ghi này?"
@@ -92,20 +123,3 @@
         </div>
     </div><!-- end col -->
 </div>
-
-@*@section css{
-        <!-- third party css -->
-        <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-    }
-
-    @section script {
-        <!-- third party js -->
-        <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
-
-        <!-- Tickets js -->
-        <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
-
-    }*@

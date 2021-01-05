@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace OnlineShop.Areas.Admin.Controllers
 {
     [Authorize]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         // GET: Admin/User
         public ActionResult Index(string searchString, int page = 1, int pageSize = CommonConstants.NUMBER_ROW_OF_PAGE)
@@ -37,6 +37,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                 int result = dao.Insert(user);
                 if (result > 0)
                 {
+                    SetAlert("Thêm User mới thành công", "success");
                     return RedirectToAction("Index", "User");
                 }
                 else
@@ -65,6 +66,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                 bool result = dao.Update(user);
                 if (result)
                 {
+                    SetAlert("Cập nhật User thành công", "success");
                     return RedirectToAction("Index", "User");
                 }
                 else
@@ -80,6 +82,16 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             new UserDAO().Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new UserDAO().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }
