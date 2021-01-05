@@ -15,18 +15,25 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [ChildActionOnly]
+        public ActionResult MainMenu()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var model = new MenuDAO().ListByGroupId(1);
+            return PartialView("_MainMenu", model);
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public ActionResult TopMenu()
         {
-            ViewBag.Message = "Your contact page.";
+            var model = new MenuDAO().ListByGroupId(2);
+            return PartialView("_TopMenu", model);
+        }
 
-            return View();
+        [ChildActionOnly]
+        public ActionResult Footer()
+        {
+            var model = new FooterDAO().GetFooter();
+            return PartialView("_Footer", model);
         }
     }
 }
