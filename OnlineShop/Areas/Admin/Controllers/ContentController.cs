@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using CKSource.CKFinder.Connector.Core.Commands.Dtos;
+using Model.DataAccessObject;
+using Model.EntityFramework;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
@@ -14,9 +14,36 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Model.EntityFramework.Content model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new ContentDAO();
+            }
+            SetViewBag((int)model.CategoryID);
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var content = new ContentDAO().GetByID(id);
+            SetViewBag((int)content.CategoryID);
+            return View();
+        }
+
+        public void SetViewBag(int? selectedID = null)
+        {
+            var dao = new CategoryDAO();
+            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedID);
         }
     }
 }

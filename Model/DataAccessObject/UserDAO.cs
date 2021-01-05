@@ -4,6 +4,8 @@ using X.PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using Model.Content;
 
 namespace Model.DataAccessObject
 {
@@ -62,13 +64,18 @@ namespace Model.DataAccessObject
             try
             {
                 var user = DataAccess.Db.Users.Find(entity.ID);
+                var createdDate = user.CreatedDate.ToString();
+                var createdBy = user.CreatedBy.ToString();
+
                 DataAccess.Db.Entry(user).CurrentValues.SetValues(entity);
+                user.CreatedDate = DateTime.Parse(createdDate);
+                user.CreatedBy = createdBy;
                 user.ModifiedDate = DateTime.Now;
+                user.ModifiedBy = HttpContext.Current.User.Identity.Name.ToString();
                 return DataAccess.Db.SaveChanges() > 0;
             }
             catch
             {
-                //loging
                 return false;
             }
         }

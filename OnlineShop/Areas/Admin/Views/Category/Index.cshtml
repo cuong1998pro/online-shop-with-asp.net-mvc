@@ -1,0 +1,182 @@
+﻿@model PagedList<Model.EntityFramework.Category>
+
+@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+@{
+    ViewBag.Title = "Dạnh sách Category";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách Category
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row justify-content-between  align-items-baseline">
+                <h4 class="header-title mb-3">Quản lý Category</h4>
+                <a href="/admin/user/create" class="btn btn-success waves-effect waves-light float-right">Thêm mới</a>
+            </div>
+            <br />
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("Index", "", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        <div class="form-group mr-2">
+                            <label class="sr-only">Từ khoá</label>
+                            <input type="text" class="form-control" placeholder="Tìm kiếm" value="@ViewBag.SearchString" name="searchString" />
+                        </div>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-md">Tìm kiếm</button>
+
+                    }
+                </div>
+            </div>
+
+<table  class="table table-hover m-0 tickets-list table-actions-bar dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ParentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DisplayOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().SeoTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaKeywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ShowOnHome)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr id="row_@item.ID">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeoTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaKeywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowOnHome)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>*@
+         <td>
+            <a href="/Admin/Category/Edit/@item.ID">Cập nhật</a>
+
+            @*@Ajax.ActionLink("Xoá<i class='fa fa-times'></i>", "Delete", new  {@id = item.ID },  new AjaxOptions
+                {
+                    Confirm = "Bạn có muốn xoá bản ghi này?",
+                    OnComplete = $"$('#row_{@item.ID}').remove()",
+                    HttpMethod = "Delete"
+                }, new { @class = "text-danger" })*@
+            |
+            <a class="text-danger" 
+                data-ajax="true"
+                data-ajax-complete="$('#row_@item.ID').remove()"
+                data-ajax-confirm="Bạn có muốn xoá bản ghi này?"
+                data-ajax-method="Delete"
+                href="/Admin/Category/Delete/@item.ID">
+                Xoá
+                @*<i class="fa fa-times"></i>*@
+            </a>
+        </td>
+
+    </tr>
+}
+
+</table>
+
+ @Html.PagedListPager(Model, page => Url.Action("Index", new { page , @searchString = @ViewBag.SearchString}), new PagedListRenderOptions
+       {
+           LiElementClasses = new string[] { "page-item" },
+           PageClasses = new string[] { "page-link" },
+
+       })
+        </div>
+    </div><!-- end col -->
+</div>
+
+@*@section css{
+        <!-- third party css -->
+        <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    }
+
+    @section script {
+        <!-- third party js -->
+        <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
+
+        <!-- Tickets js -->
+        <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
+
+    }*@
+

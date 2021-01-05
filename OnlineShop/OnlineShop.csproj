@@ -215,6 +215,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
@@ -2007,6 +2008,7 @@
     <Content Include="CKFinderScripts\skins\neko\images\svg\white\arrow-right-white.svg" />
     <Content Include="CKFinderScripts\skins\neko\skin.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Data\files\41743987_927436174123656_2921765293967540224_o.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -2091,6 +2093,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Client\" />
+    <Folder Include="Data\images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -2156,6 +2159,10 @@
     <Content Include="CKFinderScripts\lang\bg.json" />
     <Content Include="CKFinderScripts\lang\az.json" />
     <Content Include="NLog.config" />
+    <Content Include="Areas\Admin\Views\Content\Create_bak.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Data\.ckfinder\cache\data\Files\41743987_927436174123656_2921765293967540224_o.jpg.cache" />
     <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>

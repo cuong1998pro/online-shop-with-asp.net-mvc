@@ -1,6 +1,7 @@
 ﻿using Model.DataAccessObject;
 using Model.EntityFramework;
 using OnlineShop.Common;
+using System;
 using System.Web.Mvc;
 
 namespace OnlineShop.Areas.Admin.Controllers
@@ -31,6 +32,8 @@ namespace OnlineShop.Areas.Admin.Controllers
             {
                 var dao = new UserDAO();
                 user.Password = Encryptor.MD5Hash(user.Password);
+                user.CreatedDate = DateTime.Now;
+                user.CreatedBy = HttpContext.User.Identity.Name;
                 int result = dao.Insert(user);
                 if (result > 0)
                 {
@@ -49,7 +52,6 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var user = new UserDAO().ViewDetail(id);
-
             return View(user);
         }
 

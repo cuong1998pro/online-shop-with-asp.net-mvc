@@ -1,6 +1,8 @@
 ﻿@model Model.EntityFramework.User
 
 @{
+    /**/
+
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -79,17 +81,15 @@
                                     <div class="col-md-10">
                                         <div class="checkbox checkbox-primary">
                                             <input type="checkbox" name="Status" id="status" value="true" @(Model.Status ? "checked" : "") />
-                                            <label for="status">
-                                                <label for="status">Kích hoạt</label>
-                                            </label>
+                                            <label for="status">Kích hoạt</label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row float-right">
+                                <div class="row">
                                     <div class=" col-md-10 offset-md-2 justify-content-end d-flex">
                                         <input type="submit" value="Cập nhật" class="btn btn-success waves-effect waves-light mr-1" />
-                                        @Html.ActionLink("Huỷ", "Index", "User", new { @class = "btn btn-secondary waves-effect" })
+                                        @Html.ActionLink("Huỷ bỏ", "Index", "", new { @class = "btn btn-secondary waves-effect" })
                                     </div>
                                 </div>
                             </div>
