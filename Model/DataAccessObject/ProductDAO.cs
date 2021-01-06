@@ -25,5 +25,10 @@ namespace Model.DataAccessObject
         {
             return db.Products.Where(x => x.Status && x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
+
+        public Product ViewDetail(int id)
+        {
+            return db.Products.Find(id);
+        }
     }
 }

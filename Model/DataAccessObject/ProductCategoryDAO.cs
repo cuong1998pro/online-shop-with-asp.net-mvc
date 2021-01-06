@@ -15,5 +15,10 @@ namespace Model.DataAccessObject
         {
             return db.ProductCategories.Where(x => x.Status).OrderBy(x => x.DisplayOrder).ToList();
         }
+
+        public ProductCategory ViewDetail(int id)
+        {
+            return DataAccess.Db.ProductCategories.Find(id);
+        }
     }
 }
