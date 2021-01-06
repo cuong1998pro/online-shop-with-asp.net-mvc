@@ -12,6 +12,11 @@ namespace OnlineShop.Controllers
     {
         public ActionResult Index()
         {
+            var slides = new SlideDAO().ListAll();
+            var productDao = new ProductDAO();
+            ViewBag.NewProduct = productDao.ListNewProduct(4);
+            ViewBag.FeatureProduct = productDao.ListFeatureProduct(4);
+            ViewBag.Slides = slides;
             return View();
         }
 
