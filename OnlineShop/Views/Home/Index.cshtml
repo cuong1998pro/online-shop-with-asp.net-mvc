@@ -20,7 +20,7 @@
                     <div id="mover">
                         @for (int i = 0; i < slide.Count; i++)
                         {
-                            <div @((i == 0) ? "id=slide-1" : "") class="slide">
+                            <div @((i == 0) ? "id=slide-1" : "" ) class="slide">
                                 <div class="slider-img">
                                     <a href="preview.html"><img src="@slide[i].Image" alt="learn more" /></a>
                                 </div>

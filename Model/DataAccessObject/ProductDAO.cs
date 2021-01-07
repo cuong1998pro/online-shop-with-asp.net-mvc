@@ -26,6 +26,14 @@ namespace Model.DataAccessObject
             return db.Products.Where(x => x.Status && x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
 
+        public List<Product> ListAllByCategory(int id, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
+        {
+            var products = db.Products.Where(x => x.CategoryID == id).OrderBy(x => x.CreatedDate);
+            totalRecord = products.Count();
+            var model = products.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return model;
+        }
+
         public Product ViewDetail(int id)
         {
             return db.Products.Find(id);
