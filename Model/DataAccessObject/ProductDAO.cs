@@ -30,5 +30,11 @@ namespace Model.DataAccessObject
         {
             return db.Products.Find(id);
         }
+
+        public List<Product> ListRelatedProduct(int id)
+        {
+            var product = db.Products.Find(id);
+            return db.Products.Where(x => x.ID != id && x.CategoryID == product.CategoryID).OrderByDescending(x => x.CreatedDate).ToList();
+        }
     }
 }
