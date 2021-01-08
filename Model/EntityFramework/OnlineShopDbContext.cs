@@ -30,8 +30,15 @@ namespace Model.EntityFramework
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<OrderDetail>()
+                 .Property(e => e.Price)
+                 .HasPrecision(18, 0);
+
             modelBuilder.Entity<About>()
                 .Property(e => e.MetaTitle)
                 .IsUnicode(false);

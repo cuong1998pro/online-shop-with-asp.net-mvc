@@ -118,6 +118,8 @@
     <Compile Include="EntityFramework\Menu.cs" />
     <Compile Include="EntityFramework\MenuType.cs" />
     <Compile Include="EntityFramework\OnlineShopDbContext.cs" />
+    <Compile Include="EntityFramework\Order.cs" />
+    <Compile Include="EntityFramework\OrderDetail.cs" />
     <Compile Include="EntityFramework\Product.cs" />
     <Compile Include="EntityFramework\ProductCategory.cs" />
     <Compile Include="EntityFramework\Slide.cs" />
@@ -130,6 +132,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
