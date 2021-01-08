@@ -11,6 +11,7 @@ namespace Model.EntityFramework
     {
         [Key]
         [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long ProductID { get; set; }
 
         [Key]

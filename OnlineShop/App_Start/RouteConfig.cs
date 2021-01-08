@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace OnlineShop
@@ -42,11 +38,25 @@ namespace OnlineShop
           );
 
             routes.MapRoute(
+           name: "Payment",
+           url: "thanh-toan",
+           defaults: new { controller = "Cart", action = "Payment", id = UrlParameter.Optional },
+           namespaces: new[] { "OnlineShop.Controllers" }
+        );
+
+            routes.MapRoute(
               name: "Gioithieu",
               url: "gioi-thieu",
               defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
               namespaces: new[] { "OnlineShop.Controllers" }
           );
+
+            routes.MapRoute(
+             name: "Thanhcong",
+             url: "hoan-thanh",
+             defaults: new { controller = "Cart", action = "Success", id = UrlParameter.Optional },
+             namespaces: new[] { "OnlineShop.Controllers" }
+         );
 
             routes.MapRoute(
                 name: "Default",

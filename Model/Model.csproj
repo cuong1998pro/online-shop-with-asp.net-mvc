@@ -104,6 +104,8 @@
     <Compile Include="DataAccessObject\DataAccess.cs" />
     <Compile Include="DataAccessObject\FooterDAO.cs" />
     <Compile Include="DataAccessObject\MenuDAO.cs" />
+    <Compile Include="DataAccessObject\OrderDAO.cs" />
+    <Compile Include="DataAccessObject\OrderDetailDAO.cs" />
     <Compile Include="DataAccessObject\ProductCategoryDAO.cs" />
     <Compile Include="DataAccessObject\ProductDAO.cs" />
     <Compile Include="DataAccessObject\SlideDAO.cs" />

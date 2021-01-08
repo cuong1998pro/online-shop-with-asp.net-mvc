@@ -1,9 +1,9 @@
 ﻿using Model.DataAccessObject;
+using Model.EntityFramework;
 using OnlineShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -102,7 +102,38 @@ namespace OnlineShop.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Payment()
+        {
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult Payment(string name, string mobile, string address, string email)
+        {
+            var order = new Order() { CreatedDate = DateTime.Now, ShipAddress = address, ShipMobile = mobile, ShipName = name, ShipEmail = email };
+
+            var orderID = new OrderDAO().Insert(order);
+            if (orderID > 0)
+            {
+                var cart = (List<CartItem>)Session[CartSession];
+                var orderDetailDAO = new OrderDetailDAO();
+                foreach (var item in cart)
+                {
+                    var orderDetail = new OrderDetail() { ProductID = item.Product.ID, OrderID = orderID, Price = item.Product.Price, Quantity = item.Quantity };
+                    orderDetailDAO.Insert(orderDetail);
+                }
+            }
+            return Redirect("/hoan-thanh");
+        }
+
+        public ActionResult Success()
         {
             return View();
         }
