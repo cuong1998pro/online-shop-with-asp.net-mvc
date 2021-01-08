@@ -2521,6 +2521,8 @@
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\_HeaderCart.cshtml" />
+    <Content Include="Views\Cart\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

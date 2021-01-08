@@ -1,15 +1,14 @@
 ﻿using Model.DataAccessObject;
-using Model.EntityFramework;
-using System;
+using OnlineShop.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OnlineShop.Controllers
 {
     public class HomeController : Controller
     {
+        private const string CartSession = "CartSession";
+
         public ActionResult Index()
         {
             var slides = new SlideDAO().ListAll();
@@ -39,6 +38,18 @@ namespace OnlineShop.Controllers
         {
             var model = new FooterDAO().GetFooter();
             return PartialView("_Footer", model);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return PartialView("_HeaderCart", list);
         }
     }
 }

@@ -18,6 +18,7 @@
                         <td>Số lượng</td>
                         <td>Đơn giá</td>
                         <td>Thành tiền</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,14 +31,19 @@
                                 <img src="@item.Product.Image" class="img-fluid rounded" width="200" alt="@item.Product.Name" />
                             </td>
                             <td>
-                                <input type="number" class="quantity" name="name" value="@item.Quantity" />
+                                <input type="number" class="quantity" data-id="@item.Product.ID" name="name" value="@item.Quantity" />
                             </td>
                             <td>@(item.Product.Price.HasValue ? item.Product.Price.Value.ToString("N0") : "Liên hệ")</td>
                             <td>@(item.Product.Price.HasValue ? (item.Product.Price.Value * item.Quantity).ToString("N0") : "#")</td>
+                            <td><button data-id="@item.Product.ID" class="btn btn-danger deleteButton">Xoá</button></td>
                         </tr>
                     }
                 </tbody>
             </table>
+            <button id="btnContinue" class="btn btn-default"> Tiếp tục mua hàng</button>
+            <button id="btnUpdate" class="btn btn-info"> Cập nhật giỏ hàng</button>
+            <button id="btnDeleteAll" class="btn btn-danger"> Xoá giỏ hàng</button>
+            <button id="btnPayment" class="btn btn-success"> Thanh toán</button>
         }
         else
         {
@@ -45,3 +51,77 @@
         }
     </div>
 </div>
+
+@section script{
+    <script>
+        var cart = {
+            init: function () {
+                cart.registerEvent();
+            },
+            registerEvent: function () {
+                $(document).ready(function () {
+                    $("#btnContinue").off("click").click(function () {
+                        window.location.href = "/";
+                    });
+                    $("#btnUpdate").off("click").click(function () {
+                        var listProduct = $(".quantity");
+                        var cartList = [];
+                        $.each(listProduct, function (i, item) {
+                            cartList.push({
+                                Quantity: $(item).val(),
+                                Product: {
+                                    ID: $(item).data("id"),
+                                }
+                            });
+                        });
+                        $.ajax({
+                            url: "/Cart/Update",
+                            data: {
+                                cartModel: JSON.stringify(cartList)
+                            },
+                            dataType: "json",
+                            type: "Post",
+                            success: function (res) {
+                                if (res.status) {
+                                    window.location.href = "/gio-hang";
+                                }
+                            }
+                        });
+                    });
+                    $("#btnDeleteAll").off("click").click(function () {
+                        $.ajax({
+                            url: "/Cart/DeleteAll",
+                            type: "post",
+                            success: function (res) {
+                                if (res.status) {
+                                    window.location.href = "/gio-hang";
+                                }
+                            }
+                        });
+                    });
+
+                    $(".deleteButton").off("click").click(function () {
+                        var id = $(this).data("id");
+                        $.ajax({
+                            url: "/Cart/Delete",
+                            data: {
+                                id: id
+                            },
+                            dataType: "json",
+                            type: "Post",
+                            success: function (res) {
+                                if (res.status) {
+                                    window.location.href = "/gio-hang";
+                                }
+                            }
+                        });
+                    });
+                    $("#btnPayment").off("click").click(function () {
+                        window.location.href = "/";
+                    });
+                });
+            }
+        }
+        cart.init();
+    </script>
+}
