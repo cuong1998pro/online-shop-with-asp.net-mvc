@@ -1,4 +1,5 @@
-﻿using Model.DataAccessObject;
+﻿using Common;
+using Model.DataAccessObject;
 using Model.EntityFramework;
 using OnlineShop.Models;
 using System;
@@ -118,7 +119,7 @@ namespace OnlineShop.Controllers
         public ActionResult Payment(string name, string mobile, string address, string email)
         {
             var order = new Order() { CreatedDate = DateTime.Now, ShipAddress = address, ShipMobile = mobile, ShipName = name, ShipEmail = email };
-
+            int total = 0;
             var orderID = new OrderDAO().Insert(order);
             if (orderID > 0)
             {
@@ -128,8 +129,18 @@ namespace OnlineShop.Controllers
                 {
                     var orderDetail = new OrderDetail() { ProductID = item.Product.ID, OrderID = orderID, Price = item.Product.Price, Quantity = item.Quantity };
                     orderDetailDAO.Insert(orderDetail);
+                    total += (int)item.Product.Price.GetValueOrDefault(0) * item.Quantity;
                 }
             }
+
+            string content = System.IO.File.ReadAllText(Server.MapPath(@"\Assets\Client\newOrder.html"));
+            content = content.Replace("{{CustomerName}}", name);
+            content = content.Replace("{{Phone}}", mobile);
+            content = content.Replace("{{Email}}", email);
+            content = content.Replace("{{Address}}", address);
+            content = content.Replace("{{Total}}", total.ToString("N0"));
+
+            new MailHelper().SendMail(email, "Đơn hàng mới", content);
             return Redirect("/hoan-thanh");
         }
 

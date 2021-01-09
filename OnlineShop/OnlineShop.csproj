@@ -228,6 +228,7 @@
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1442,6 +1443,7 @@
     <Content Include="Assets\Client\js\script.js" />
     <Content Include="Assets\Client\js\slides.min.jquery.js" />
     <Content Include="Assets\Client\js\startstop-slider.js" />
+    <Content Include="Assets\Client\newOrder.html" />
     <Content Include="CKFinderScripts\CHANGELOG.html" />
     <Content Include="CKFinderScripts\ckfinder.html" />
     <Content Include="CKFinderScripts\ckfinder.js" />
@@ -2524,8 +2526,13 @@
     <Content Include="Views\Shared\_HeaderCart.cshtml" />
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CF3D7437-EF11-46ED-95FA-DF5AB58BDBC1}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{68dcb5a1-af4d-4505-aa72-7643fbb623ac}</Project>
       <Name>Model</Name>

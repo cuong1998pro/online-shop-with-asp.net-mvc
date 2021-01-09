@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Content\CustomErrorMessage.cs" />
     <Compile Include="DataAccessObject\CategoryDAO.cs" />
+    <Compile Include="DataAccessObject\ContactDAO.cs" />
     <Compile Include="DataAccessObject\ContentDAO.cs" />
     <Compile Include="DataAccessObject\DataAccess.cs" />
     <Compile Include="DataAccessObject\FooterDAO.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="EntityFramework\Tag.cs" />
     <Compile Include="EntityFramework\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

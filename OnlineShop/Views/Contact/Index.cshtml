@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Model.EntityFramework.Contact
+
+@section header{
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMT1ZZH3Kk2fUJsdmiFOtwh5Mew8oQdv4&callback=initMap&libraries=&v=weekly"
+            defer></script>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 500px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        let map;
+
+        //20.926281842837586, 106.65444196751324
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 20.926281842837586, lng: 106.65444196751324 },
+                zoom: 16,
+            });
+        }
+    </script>
+
+    @*<script>
+            var contact = {
+                init: function () {
+                    contact.registerEvent();
+                },
+                registerEvent: function () {
+                    $("btnSend").off("click").click(function () {
+                        var name =
+                    });
+                }
+            };
+            contact.init();
+        </script>*@
+
+}
+
+<div class="content">
+    <!-- Alert-->
+    @if (TempData["AlertMessage"] != null)
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert  @TempData["AlertType"] ">
+
+                    @TempData["AlertMessage"]
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Create", "Contact", FormMethod.Post))
+            {
+                <h2>Thông tin liên hệ</h2>
+                @Html.Raw(Model.Content)
+                <br />
+                <h2>Gửi thông tin</h2>
+                <div class="form-group">
+                    <label>Họ tên</label>
+                    <input type="text" id="name" name="hoten" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                    <label>Điện thoại</label>
+                    <input type="text" id="name" name="dienthoai" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" id="name" name="diachi" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="name" name="email" class="form-control" value="" />
+                </div>
+
+                <div class="form-group">
+                    <label>Yêu cầu</label>
+                    <textarea class="form-control" name="yeucau"></textarea>
+                </div>
+                <button class="btn btn-success" id="btnSend">Gửi đi</button>
+            }
+        </div>
+        <div class="col-md-6">
+            <h2>Bản đồ</h2>
+            <div id="map">
+            </div>
+        </div>
+    </div>
+</div>
