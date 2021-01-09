@@ -99,5 +99,15 @@ namespace Model.DataAccessObject
             DataAccess.Db.SaveChanges();
             return user.Status;
         }
+
+        public bool CheckUserName(string username)
+        {
+            return DataAccess.Db.Users.Count(x => x.UserName == username) > 0;
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return DataAccess.Db.Users.Count(x => x.Email == email) > 0;
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             {
                 TempData["AlertType"] = "alert-success";
             }
-            else if (type == "Warning")
+            else if (type == "warning")
             {
                 TempData["AlertType"] = "alert-warning";
             }
