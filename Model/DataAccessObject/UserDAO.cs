@@ -109,5 +109,18 @@ namespace Model.DataAccessObject
         {
             return DataAccess.Db.Users.Count(x => x.Email == email) > 0;
         }
+
+        public int InsertForFacebook(User user)
+        {
+            var db = DataAccess.Db;
+            var result = db.Users.SingleOrDefault(x => x.UserName == user.UserName);
+            if (result == null)
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return user.ID;
+            }
+            return result.ID;
+        }
     }
 }
