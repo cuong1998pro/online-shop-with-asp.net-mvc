@@ -172,6 +172,8 @@ namespace Model.EntityFramework
                 .IsUnicode(false);
         }
 
+        // public System.Data.Entity.DbSet<OnlineShop.Models.LoginModel> LoginModels { get; set; }
+
         //public System.Data.Entity.DbSet<OnlineShop.Models.RegisterModel> RegisterModels { get; set; }
     }
 }

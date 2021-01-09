@@ -2,6 +2,7 @@
 using Model.DataAccessObject;
 using Model.EntityFramework;
 using OnlineShop.Areas.Admin.Controllers;
+using OnlineShop.Common;
 using OnlineShop.Models;
 using System;
 using System.Web.Mvc;
@@ -39,7 +40,7 @@ namespace OnlineShop.Controllers
                     var user = new User()
                     {
                         UserName = model.UserName,
-                        Password = model.Password,
+                        Password = Encryptor.MD5Hash(model.Password),
                         Email = model.Email,
                         Name = model.Name,
                         Address = model.Address,
@@ -59,7 +60,43 @@ namespace OnlineShop.Controllers
                 }
             }
             MvcCaptcha.ResetCaptcha("ExampleCaptcha");
+            return View(model);
+        }
+
+        public ActionResult Login()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDAO();
+                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Password));
+                if (result is bool)
+                {
+                    var user = dao.GetByUsername(model.Username);
+                    var userSession = new UserLogin();
+                    userSession.Username = user.UserName;
+                    userSession.UserID = user.ID;
+                    Session.Add(CommonConstants.USER_SESSION.ToString(), userSession);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Đăng nhập không đúng");
+                }
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Remove(CommonConstants.USER_SESSION.ToString());
+            return RedirectToAction("Index", "Home");
         }
     }
 }
