@@ -6,8 +6,11 @@ using OnlineShop.Areas.Admin.Controllers;
 using OnlineShop.Common;
 using OnlineShop.Models;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace OnlineShop.Controllers
 {
@@ -173,6 +176,52 @@ namespace OnlineShop.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public JsonResult LoadProvince()
+        {
+            var xmlDoc = XDocument.Load(Server.MapPath(@"/assets/client/data/Provinces_Data.xml"));
+            var xElements = xmlDoc.Element("Root").Elements("Item").Where(x => x.Attribute("type").Value == "province");
+
+            var listProvince = new List<ProvinceModel>();
+            foreach (var item in xElements)
+            {
+                listProvince.Add(new ProvinceModel()
+                {
+                    ID = int.Parse(item.Attribute("id").Value),
+                    Name = item.Attribute("value").Value
+                });
+            }
+            return Json(new
+            {
+                data = listProvince,
+                status = true
+            });
+        }
+
+        public JsonResult LoadDistrict(int ProvinceID)
+        {
+            var xmlDoc = XDocument.Load(Server.MapPath(@"/assets/client/data/Provinces_Data.xml"));
+
+            var province = xmlDoc.Element("Root").Elements("Item").First(x => x.Attribute("type").Value == "province" && int.Parse(x.Attribute("id").Value) == ProvinceID);
+            var district = province.Elements("Item");
+
+            var list = new List<DistrictModel>();
+            foreach (var item in district)
+            {
+                list.Add(new DistrictModel()
+                {
+                    Name = item.Attribute("value").Value,
+                    ID = int.Parse(item.Attribute("id").Value),
+                    ProvinceID = int.Parse(province.Attribute("id").Value),
+                });
+            }
+
+            return Json(new
+            {
+                data = list,
+                status = true
+            });
         }
     }
 }

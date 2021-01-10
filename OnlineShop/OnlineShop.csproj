@@ -248,7 +248,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ProvinceModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1394,6 +1396,7 @@
     <Content Include="Assets\Client\css\global.css" />
     <Content Include="Assets\Client\css\slider.css" />
     <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\data\Provinces_Data.xml" />
     <Content Include="Assets\Client\font\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Client\images\about_img.jpg" />
     <Content Include="Assets\Client\images\arrow-next.png" />

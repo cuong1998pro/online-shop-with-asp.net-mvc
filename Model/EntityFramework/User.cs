@@ -38,6 +38,12 @@
         [Display(Name = "Số điện thoại")]
         public string Phone { get; set; }
 
+        [Display(Name = "Tỉnh, Thành phố")]
+        public int? ProvinceID { get; set; }
+
+        [Display(Name = "Quận huyện")]
+        public int? DistrictID { get; set; }
+
         [Display(Name = "Ngày tạo")]
         public DateTime? CreatedDate { get; set; }
 

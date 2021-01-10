@@ -35,6 +35,12 @@ namespace OnlineShop.Models
         [CustomRequired]
         public string Phone { get; set; }
 
+        [Display(Name = "Tỉnh, Thành phố")]
+        public int? ProvinceID { get; set; }
+
+        [Display(Name = "Quận huyện")]
+        public int? DistrictID { get; set; }
+
         public string CaptchaCode { get; set; }
     }
 }
