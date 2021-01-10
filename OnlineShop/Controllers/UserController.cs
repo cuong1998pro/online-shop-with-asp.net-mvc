@@ -64,6 +64,8 @@ namespace OnlineShop.Controllers
                         Phone = model.Phone,
                         CreatedDate = DateTime.Now,
                         Status = true,
+                        ProvinceID = model.ProvinceID,
+                        DistrictID = model.DistrictID,
                     };
                     var result = dao.Insert(user);
                     if (result > 0)
