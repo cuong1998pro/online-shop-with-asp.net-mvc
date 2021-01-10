@@ -46,12 +46,47 @@ namespace Model.DataAccessObject
                             CategoryMetaTitle = b.MetaTitle,
                             CategoryName = b.Name,
                             ID = (int)a.ID,
-                            Images = a.Image,
+                            Image = a.Image,
                             Name = a.Name,
                             MetaTitle = a.MetaTitle,
                             Price = a.Price
                         };
             return model.ToList();
+        }
+
+        public List<ProductViewModel> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
+        {
+            var products = db.Products.Where(x => x.Name.Contains(keyword)).OrderBy(x => x.CreatedDate);
+            totalRecord = products.Count();
+            var model = (from a in db.Products
+                         join b in db.ProductCategories
+                         on a.CategoryID equals b.ID
+                         where a.Name.Contains(keyword)
+                         select new
+                         {
+                             CategoryMetaTitle = b.MetaTitle,
+                             CategoryName = b.Name,
+                             ID = (int)a.ID,
+                             Image = a.Image,
+                             Name = a.Name,
+                             MetaTitle = a.MetaTitle,
+                             Price = a.Price
+                         }).ToList().Select(x => new ProductViewModel()
+                         {
+                             CategoryMetaTitle = x.MetaTitle,
+                             CategoryName = x.Name,
+                             ID = (int)x.ID,
+                             Image = x.Image,
+                             Name = x.Name,
+                             MetaTitle = x.MetaTitle,
+                             Price = x.Price
+                         });
+            return model.ToList();
+        }
+
+        public List<string> ListName(string q)
+        {
+            return db.Products.Where(x => x.Name.Contains(q)).Select(x => x.Name).ToList();
         }
 
         public Product ViewDetail(int id)

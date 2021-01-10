@@ -6,16 +6,53 @@
             @for (int i = 0; i < Model.Count(); i++)
             {
                 <li><a href="@Model[i].Link" target="@Model[i].Target">@Model[i].Text</a></li>
-
             }
-
             <div class="clear"></div>
         </ul>
     </div>
     <div class="search_box">
-        <form>
-            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+        <form action="/tim-kiem" method="get">
+            <input type="text" id="txtKeyword" name="keyword" placeholder="search"><input type="submit" value="">
         </form>
     </div>
     <div class="clear"></div>
 </div>
+
+<script>
+    var common = {
+        init: function () {
+            this.registerEvents();
+        },
+        registerEvents: function () {
+            $('#txtKeyword').autocomplete({
+                minLength: 0,
+                source: function (req, res) {
+                    $.ajax({
+                        url: '/Product/listname',
+                        dataType: 'json',
+                        data: {
+                            q: req.term
+                        },
+                        success: function (result) {
+                            res(result.data);
+                        }
+                    });
+                },
+                focus: function (event, ui) {
+                    $('#txtKeyword').val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $('#txtKeyword').val(ui.item.label);
+                    return false;
+                }
+            })
+                .autocomplete("instance")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .append("<div>" + item.label + "</div>")
+                        .appendTo(ul);
+                };
+        }
+    };
+    common.init();
+</script>

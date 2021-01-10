@@ -1,9 +1,5 @@
 ﻿using Model.DataAccessObject;
-using OnlineShop.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OnlineShop.Controllers
@@ -54,6 +50,40 @@ namespace OnlineShop.Controllers
             ViewBag.Category = new ProductCategoryDAO().ViewDetail((int)product.CategoryID);
             ViewBag.RelatedProduct = new ProductDAO().ListRelatedProduct(id);
             return View(product);
+        }
+
+        public JsonResult ListName(string q)
+        {
+            var result = new ProductDAO().ListName(q);
+            return Json(new
+            {
+                data = result,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Search(string keyword, int pageIndex = 1, int pageSize = 1)
+        {
+            int totalRecord = 0;
+            var products = new ProductDAO().Search(keyword, ref totalRecord, pageIndex, pageSize);
+
+            //Phân trang
+            ViewBag.Total = totalRecord;
+            ViewBag.PageIndex = pageIndex;
+
+            int totalPage = 0, maxPage = 5;
+            totalPage = (int)Math.Ceiling((float)totalRecord / pageSize);
+
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = maxPage;
+            ViewBag.Next = pageIndex + 1;
+            ViewBag.Prev = pageIndex - 1;
+
+            ViewBag.Keyword = keyword;
+
+            return View(products);
         }
     }
 }

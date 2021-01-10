@@ -1394,6 +1394,7 @@
     <Content Include="Assets\Client\css\bootstrap.min.css" />
     <Content Include="Assets\Client\css\easy-responsive-tabs.css" />
     <Content Include="Assets\Client\css\global.css" />
+    <Content Include="Assets\Client\css\jquery-ui.css" />
     <Content Include="Assets\Client\css\slider.css" />
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\data\Provinces_Data.xml" />
@@ -1454,6 +1455,7 @@
     <Content Include="Assets\Client\js\easyResponsiveTabs.js" />
     <Content Include="Assets\Client\js\jquery-1.7.2.min.js" />
     <Content Include="Assets\Client\js\jquery-3.5.1.min.js" />
+    <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\jquery.accordion.js" />
     <Content Include="Assets\Client\js\jquery.easing.js" />
     <Content Include="Assets\Client\js\move-top.js" />
@@ -2547,6 +2549,7 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

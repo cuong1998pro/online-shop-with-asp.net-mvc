@@ -24,6 +24,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link rel="stylesheet" href="/assets/client/css/global.css">
     <script src="/assets/client/js/slides.min.jquery.js"></script>
     <script src="/Assets/Client/js/bootstrap.min.js"></script>
+    <link href="/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
+    <script src="/Assets/Client/js/jquery-ui.js"></script>
     @RenderSection("header", false)
 </head>
 <body>
@@ -69,6 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="clear"></div>
             </div>
             @{Html.RenderAction("MainMenu", "Home"); }
+
             @RenderSection("slide", false)
         </div>
         <div class="main">
