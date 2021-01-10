@@ -47,6 +47,7 @@ namespace OnlineShop.Controllers
             return View(products);
         }
 
+        [OutputCache(CacheProfile = "CacheForProduct")]
         public ActionResult ProductDetail(int id)
         {
             var product = new ProductDAO().ViewDetail(id);
