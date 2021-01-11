@@ -60,5 +60,9 @@
 
         [Display(Name = "Trạng thái")]
         public bool Status { get; set; }
+
+        [Display(Name = "Nhóm người dùng")]
+        [CustomRequired]
+        public string GroupID { get; set; }
     }
 }

@@ -108,7 +108,9 @@ namespace OnlineShop.Common
 
         public override bool ValidateUser(string username, string password)
         {
-            return new UserDAO().Login(username, password) is bool;
+            var dao = new UserDAO();
+            var group = dao.GetByUsername(username).GroupID;
+            return dao.Login(username, password) is bool && group != CommonConstants.MEMBER_GROUP;
         }
     }
 }

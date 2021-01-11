@@ -122,5 +122,21 @@ namespace Model.DataAccessObject
             }
             return result.ID;
         }
+
+        public List<string> GetListCredential(string username)
+        {
+            var db = DataAccess.Db;
+            var user = GetByUsername(username);
+            var data = (from a in db.Credentials
+                        join b in db.UserGroups
+                        on a.UserGroupID equals b.ID
+                        join c in db.Roles
+                        on a.RoleID equals c.ID
+                        where user.GroupID == b.ID
+                        select new { role = a.RoleID }).ToList();
+            ;
+            var result = data.Select(x => x.role).ToList();
+            return result;
+        }
     }
 }

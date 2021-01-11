@@ -237,6 +237,7 @@
     <Compile Include="Common\CustomCKFinderAuthenticator.cs" />
     <Compile Include="Common\CustomMembershipProvider.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\HasPermissionAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -2554,6 +2555,7 @@
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\Detail.cshtml" />
     <Content Include="Views\Content\Tag.cshtml" />
+    <Content Include="Views\Shared\401.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

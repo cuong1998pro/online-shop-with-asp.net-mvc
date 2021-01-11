@@ -57,8 +57,14 @@ namespace OnlineShop.Areas.Admin.Controllers
                 }
                 else
                 {
-                    string result = (string)dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
-                    ModelState.AddModelError("", result);
+                    try
+                    {
+                        string result = (string)dao.Login(model.Username, Encryptor.MD5Hash(model.Pasword));
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("", "Tài khoản của bạn không có quyền đăng nhập");
+                    }
                 }
             }
             else

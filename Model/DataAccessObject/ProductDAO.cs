@@ -33,7 +33,7 @@ namespace Model.DataAccessObject
             return model;
         }
 
-        public List<ProductViewModel> ListAllByCategoryByID(int id, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
+        public List<ViewModel.ProductViewModel> ListAllByCategoryByID(int id, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
         {
             var products = db.Products.Where(x => x.CategoryID == id).OrderBy(x => x.CreatedDate);
             totalRecord = products.Count();
@@ -41,7 +41,7 @@ namespace Model.DataAccessObject
                         join b in db.ProductCategories
                         on a.CategoryID equals b.ID
                         where a.CategoryID == id
-                        select new ProductViewModel()
+                        select new ViewModel.ProductViewModel()
                         {
                             CategoryMetaTitle = b.MetaTitle,
                             CategoryName = b.Name,
@@ -54,7 +54,7 @@ namespace Model.DataAccessObject
             return model.ToList();
         }
 
-        public List<ProductViewModel> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
+        public List<ViewModel.ProductViewModel> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 10)
         {
             var products = db.Products.Where(x => x.Name.Contains(keyword)).OrderBy(x => x.CreatedDate);
             totalRecord = products.Count();
@@ -71,7 +71,7 @@ namespace Model.DataAccessObject
                              Name = a.Name,
                              MetaTitle = a.MetaTitle,
                              Price = a.Price
-                         }).ToList().Select(x => new ProductViewModel()
+                         }).ToList().Select(x => new ViewModel.ProductViewModel()
                          {
                              CategoryMetaTitle = x.MetaTitle,
                              CategoryName = x.Name,
