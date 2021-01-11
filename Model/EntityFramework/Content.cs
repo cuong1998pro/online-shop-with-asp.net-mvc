@@ -23,6 +23,8 @@ namespace Model.EntityFramework
 
         public long? CategoryID { get; set; }
 
+        public Category Category { get; set; }
+
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 

@@ -38,54 +38,5 @@
         <div class="clear"></div>
 
         @*Phân trang*@
-        @if (ViewBag.TotalPage > 0)
-        {
-            var pageDisplay = (int)ViewBag.MaxPage;
-            int totalPage = (int)ViewBag.TotalPage;
-            int currentPage = (int)ViewBag.PageIndex;
-
-            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
-            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-
-            var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
-            <nav>
-                <ul class="pagination">
-                    @if (currentPage > ViewBag.First)
-                    {
-                        <li>
-                            <a href="@link?pageIndex=@ViewBag.First" title="Trang đầu" class="first">
-                                <<
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@link?pageIndex=@ViewBag.Prev" title="Trang trước" class="first">
-                                <
-                            </a>
-                        </li>
-                    }
-                    @for (int i = startPageIndex; i <= endPageIndex; i++)
-                    {
-                        if (currentPage == i)
-                        {
-                            <li><a href="@link?pageIndex=@i" class="active" title="Trang @i">@i</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="@link?pageIndex=@i" title="Trang @i" class="pos">@i</a></li>
-
-                        }
-                    }
-                    @if (currentPage < totalPage)
-                    {
-                        <li><a href="@link?pageIndex=@ViewBag.Next" class="next" title="Trang sau"> > </a></li>
-                        <li><a href="@link?pageIndex=@ViewBag.Last" class="last" title="Trang cuối"> >> </a></li>
-                    }
-                </ul>
-            </nav>
-        }
-        else
-        {
-            <span>Không có bản ghi nào</span>
-        }
     </div>
 </div>

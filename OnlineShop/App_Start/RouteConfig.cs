@@ -98,6 +98,27 @@ namespace OnlineShop
             );
 
             routes.MapRoute(
+             name: "TinTucChiTiet",
+             url: "tin-tuc/{metatitle}-{id}",
+             defaults: new { controller = "Content", action = "Detail", id = UrlParameter.Optional },
+             namespaces: new[] { "OnlineShop.Controllers" }
+           );
+
+            routes.MapRoute(
+              name: "TinTuc",
+              url: "tin-tuc",
+              defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "OnlineShop.Controllers" }
+            );
+
+            routes.MapRoute(
+             name: "Tag",
+             url: "tag/{tagid}",
+             defaults: new { controller = "Content", action = "Tag", id = UrlParameter.Optional },
+             namespaces: new[] { "OnlineShop.Controllers" }
+           );
+
+            routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{id}",
                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

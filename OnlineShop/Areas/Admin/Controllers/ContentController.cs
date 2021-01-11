@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ContentController : Controller
     {
         // GET: Admin/Content
@@ -31,7 +32,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new ContentDAO();
-                int result = dao.Insert(model);
+                int result = dao.Create(model);
                 if (result > 0)
                 {
                     return RedirectToAction("Index");

@@ -43,53 +43,22 @@
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
                     </th>
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaTitle)
-                        </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
-                    </th>
+
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().CategoryID)
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Category)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().Detail)
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedDate)
                     </th>
-                    <!-- #region Comment -->
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaKeywords)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().MetaDescription)</th>*@
-                    <!-- #endregion -->
+
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
                     </th>
-                    <!--#region Comment-->
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().TopHot)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().ViewCount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().Tags)</th>*@
-                    <!-- #endregion-->
+
                     <th>Actions</th>
                 </tr>
 
@@ -99,70 +68,25 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.MetaTitle)
-                            </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
+
                         <td>
                             <img class="rounded img-fluid width-sm" style="max-width:150px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Lỗi tải ảnh" />
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CategoryID)
+                            @Html.DisplayFor(modelItem => item.Category.Name)
                         </td>
+
                         <td>
-                            @Html.Raw(item.Detail)
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
                         </td>
-                        <!--#region Comment-->
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.CreatedDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreatedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MetaKeywords)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MetaDescription)
-                            </td>*@
-                        <!--#endregion -->
 
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
-                        <!--#region Comment-->
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.TopHot)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ViewCount)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Tags)
-                            </td>*@
-                        @*<td>
-                                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-                            </td>*@
-                        <!--#endregion-->
+
                         <td>
                             <a href="/Admin/Content/Edit/@item.ID">Cập nhật</a>
 
-                            @*@Ajax.ActionLink("Xoá<i class='fa fa-times'></i>", "Delete", new  {@id = item.ID },  new AjaxOptions
-                                {
-                                    Confirm = "Bạn có muốn xoá bản ghi này?",
-                                    OnComplete = $"$('#row_{@item.ID}').remove()",
-                                    HttpMethod = "Delete"
-                                }, new { @class = "text-danger" })*@
                             |
                             <a class="text-danger"
                                data-ajax="true"
@@ -187,20 +111,3 @@
         </div>
     </div><!-- end col -->
 </div>
-
-@*@section css{
-        <!-- third party css -->
-        <link href="/Assets/Admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="/Assets/Admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-    }
-
-    @section script {
-        <!-- third party js -->
-        <script src="/Assets/Admin/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="/Assets/Admin/libs/datatables/dataTables.responsive.min.js"></script>
-
-        <!-- Tickets js -->
-        <script src="/Assets/Admin/js/pages/tickets.init.js"></script>
-
-    }*@

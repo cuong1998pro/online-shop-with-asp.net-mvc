@@ -57,5 +57,8 @@
 
         [Display(Name = "Hiển thị trên trang chủ")]
         public bool ShowOnHome { get; set; }
+
+        [ForeignKey("CategoryID")]
+        public ICollection<Content> Contents { get; set; }
     }
 }

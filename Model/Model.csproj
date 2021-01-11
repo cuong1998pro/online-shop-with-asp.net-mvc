@@ -129,6 +129,15 @@
     <Compile Include="EntityFramework\SystemConfig.cs" />
     <Compile Include="EntityFramework\Tag.cs" />
     <Compile Include="EntityFramework\User.cs" />
+    <Compile Include="Migrations\202101110315222_AddForeignKey.cs" />
+    <Compile Include="Migrations\202101110315222_AddForeignKey.designer.cs">
+      <DependentUpon>202101110315222_AddForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101110351224_link-content-category.cs" />
+    <Compile Include="Migrations\202101110351224_link-content-category.designer.cs">
+      <DependentUpon>202101110351224_link-content-category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
   </ItemGroup>
@@ -136,7 +145,20 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CF3D7437-EF11-46ED-95FA-DF5AB58BDBC1}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101110315222_AddForeignKey.resx">
+      <DependentUpon>202101110315222_AddForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101110351224_link-content-category.resx">
+      <DependentUpon>202101110351224_link-content-category.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
